@@ -39,7 +39,10 @@ dependencies:
   image: ^3.3.0
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.2.2  
+  sqflite: ^2.3.0
   path_provider: ^2.1.1
+  path: ^1.8.3
+
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +70,19 @@ flutter:
   assets:
     - assets/model_mobile.tflite
     - assets/labels.txt
+    - assets/icon/artikel.png
+    - assets/icon/cek.png
+    - assets/icon/history.png
+    - assets/icon/info.png
+    - assets/icon/onboarding_1.png
+    - assets/icon/onboarding_2.png
+    - assets/icon/onboarding_3.png
+    - assets/icon/logo.png
+
+
+
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

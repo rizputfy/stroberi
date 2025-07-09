@@ -1,11 +1,23 @@
 import '../models/history_item.dart';
+import '../models/db_helper.dart';
 
 class HistoryService {
-  static final List<HistoryItem> _history = [];
+  Future<void> saveDetection({
+    required String imagePath,
+    required String label,
+    required double confidence,
+  }) async {
+    final item = HistoryItem(
+      imagePath: imagePath,
+      label: label,
+      confidence: confidence,
+      dateTime: DateTime.now().toIso8601String(),
+    );
 
-  static void addHistory(HistoryItem item) {
-    _history.insert(0, item);
+    await DBHelper().insertHistory(item);
   }
 
-  static List<HistoryItem> get history => _history;
+  Future<List<HistoryItem>> fetchHistory() async {
+    return await DBHelper().getAllHistory();
+  }
 }

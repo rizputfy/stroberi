@@ -1,31 +1,35 @@
 class HistoryItem {
+  final int? id;
+  final String imagePath;
   final String label;
-  final String confidence;
-  final DateTime dateTime;
-  final String imagePath; // Tambahan baru
+  final double confidence;
+  final String dateTime;
 
   HistoryItem({
+    this.id,
+    required this.imagePath,
     required this.label,
     required this.confidence,
     required this.dateTime,
-    required this.imagePath,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
+      'imagePath': imagePath,
       'label': label,
       'confidence': confidence,
-      'dateTime': dateTime.toIso8601String(),
-      'imagePath': imagePath, // simpan juga path gambar
+      'dateTime': dateTime,
     };
   }
 
   factory HistoryItem.fromMap(Map<String, dynamic> map) {
     return HistoryItem(
+      id: map['id'],
+      imagePath: map['imagePath'],
       label: map['label'],
       confidence: map['confidence'],
-      dateTime: DateTime.parse(map['dateTime']),
-      imagePath: map['imagePath'],
+      dateTime: map['dateTime'],
     );
   }
 }
