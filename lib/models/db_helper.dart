@@ -49,4 +49,14 @@ class DBHelper {
     final List<Map<String, dynamic>> maps = await db.query('history', orderBy: 'id DESC');
     return List.generate(maps.length, (i) => HistoryItem.fromMap(maps[i]));
   }
+
+  Future<void> deleteHistoryById(int id) async {
+      final db = await database;
+      await db.delete('history', where: 'id = ?', whereArgs: [id]);
+    }
+
+    Future<void> deleteAllHistory() async {
+      final db = await database;
+      await db.delete('history');
+    }
 }

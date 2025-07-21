@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'onboarding.dart'; 
+import 'theme.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     // Simulasi loading selama 2 detik
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const OnboardingScreen()),
@@ -26,25 +27,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEF5A6F),
+      // backgroundColor: AppColors.secondary,
+      backgroundColor: AppColors.primary,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/icon/logo.png', width: 120), // ganti dengan logo kamu
+            Image.asset('assets/icon/logo_baru.png', width: 250), 
             const SizedBox(height: 20),
-            const Text(
-              'StroMate',
-              style: TextStyle(
-                color: Color(0xFFFCFDF2),
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            const CircularProgressIndicator(
-              color: Color(0xFFFCFDF2),
-            ),
           ],
         ),
       ),
