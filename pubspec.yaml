@@ -1,4 +1,4 @@
-name: stroberi
+name: stromate
 description: Aplikasi deteksi kematangan buah stroberi
 version: 1.0.0+1
 
@@ -19,6 +19,8 @@ dependencies:
   path: ^1.8.3
   intl: ^0.18.1
   lucide_icons: ^0.257.0
+  url_launcher: ^6.2.1
+  android_intent_plus: ^4.0.2
 
 dev_dependencies:
   flutter_test:
@@ -41,6 +43,7 @@ flutter:
     - assets/icon/logo.png
     - assets/icon/logo_baru.png
     - assets/icon/logooo.png
+    - assets/icon/pengembang.png
     - assets/images/kebun.jpg
     - assets/images/piring.jpg
     - assets/images/stroberi.jpg
@@ -50,3 +53,4 @@ flutter:
     - assets/artikel/2.png
     - assets/artikel/3.png
     - assets/artikel/4.png
+    - assets/artikel/logo.png

@@ -150,7 +150,7 @@ class _ArtikelPageState extends State<ArtikelPage> {
                     Navigator.pop(context);
                   },
                 ),
-                Expanded(
+                const Expanded(
                   child: Center(
                     child: Text(
                       'ARTIKEL STROBERI',
@@ -162,7 +162,7 @@ class _ArtikelPageState extends State<ArtikelPage> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 48), // Spacer untuk seimbangkan ikon back
+                const SizedBox(width: 48), 
               ],
             ),
 

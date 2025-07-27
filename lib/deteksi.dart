@@ -131,7 +131,7 @@ class _DeteksiPageState extends State<DeteksiPage> {
         backgroundColor: AppColors.primary,
         title: const Text(
           "DETEKSI STROBERI",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
@@ -192,7 +192,7 @@ class _DeteksiPageState extends State<DeteksiPage> {
                       child: const Center(
                         child: Text(
                           "Belum ada gambar dipilih.",
-                          style: TextStyle(color: Colors.black87, fontSize: 16),
+                          style: TextStyle(color: Colors.black87, fontSize: 16, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -234,10 +234,31 @@ class _DeteksiPageState extends State<DeteksiPage> {
             margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
             child: ElevatedButton(
               onPressed: () async {
-                if (_imageFile == null) return;
+                if (_imageFile == null) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Gambar belum dipilih"),
+                        content: const Text("Silakan unggah atau ambil gambar terlebih dahulu sebelum melakukan deteksi."),
+                        actions: [
+                          TextButton(
+                            child: const Text("OK"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  return;
+                }
+
                 setState(() {
                   _loading = true;
                 });
+
                 final imageBytes = await _imageFile!.readAsBytes();
                 final image = img.decodeImage(imageBytes);
                 if (image != null) {
@@ -248,6 +269,7 @@ class _DeteksiPageState extends State<DeteksiPage> {
                   });
                 }
               },
+
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.teal[200],
                 foregroundColor: Colors.white,

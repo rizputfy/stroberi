@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:stroberi/theme.dart';
+import '/theme.dart';
 
 class HasilDeteksiPage extends StatelessWidget {
   final String imagePath;
@@ -74,7 +74,7 @@ class HasilDeteksiPage extends StatelessWidget {
       normalizedLabel = 'Busuk';
     } else if (normalizedLabel == 'bukanstroberi') {
       normalizedLabel = 'Bukan Stroberi';
-    } 
+    }
 
     final ciriList = ciriCiriBuah[normalizedLabel] ?? ['Informasi tidak tersedia'];
     final tipsList = tipsPenyimpanan[normalizedLabel] ?? ['Informasi tidak tersedia'];
@@ -92,14 +92,14 @@ class HasilDeteksiPage extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: const Icon(Icons.arrow_back, color: AppColors.secondary, size: 28),
+                  child: const Icon(Icons.arrow_back, color: AppColors.secondary, size: 24),
                 ),
                 const SizedBox(width: 12),
                 const Text(
                   'HASIL DETEKSI',
                   style: TextStyle(
                     color: AppColors.secondary,
-                    fontSize: 30,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -155,7 +155,7 @@ class HasilDeteksiPage extends StatelessWidget {
                       "BUAH STROBERI ${normalizedLabel.toUpperCase()}",
                       style: const TextStyle(
                         color: AppColors.secondary,
-                        fontSize: 24,
+                        fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -174,15 +174,22 @@ class HasilDeteksiPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                       Text(
+                        Text(
                           'CIRI-CIRI BUAH STROBERI ${normalizedLabel.toUpperCase()}',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
                         ),
-                        const SizedBox(height: 15),
-                        ...ciriList.map((ciri) => Text('• $ciri', style: const TextStyle(color: Colors.white))),
+                        const SizedBox(height: 20),
+                        ...ciriList.map((ciri) => Text(
+                              '• $ciri',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            )).toList(),
                       ],
                     ),
                   ),
@@ -205,10 +212,17 @@ class HasilDeteksiPage extends StatelessWidget {
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
                         ),
-                        const SizedBox(height: 15),
-                        ...tipsList.map((tips) => Text('• $tips', style: const TextStyle(color: Colors.white))),
+                        const SizedBox(height: 20),
+                        ...tipsList.map((tips) => Text(
+                              '• $tips',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            )).toList(),
                       ],
                     ),
                   ),

@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:stroberi/theme.dart';
+import '/theme.dart';
 
 class HasilDeteksiPage extends StatelessWidget {
   final String imagePath;

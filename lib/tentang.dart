@@ -1,9 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'theme.dart';
 
 class TentangAplikasiPage extends StatelessWidget {
   const TentangAplikasiPage({Key? key}) : super(key: key);
+
+  void _launchEmail(BuildContext context, String email) async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: email,
+    );
+
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(
+        emailUri,
+        mode: LaunchMode.externalApplication,
+      );
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Tidak dapat membuka aplikasi email.'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +51,7 @@ class TentangAplikasiPage extends StatelessWidget {
           children: [
             Center(
               child: Image.asset(
-                'assets/artikel/1.png',
+                'assets/artikel/logo.png',
                 width: 200,
                 height: 100,
               ),
@@ -46,43 +69,79 @@ class TentangAplikasiPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Card: Deskripsi & Fitur
-            CardSection(
+            const CardSection(
               child: Column(
-                children: const [
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Text(
-                    'StroMate adalah aplikasi cerdas yang membantu Anda mendeteksi tingkat kematangan buah stroberi (mentah, matang, busuk), memberikan tips penyimpanan terbaik, serta menyediakan informasi bermanfaat tentang stroberi.',
+                    'Apa yang Kami Tawarkan:',
                     style: TextStyle(
+                      fontWeight: FontWeight.bold,
                       color: AppColors.primary,
                       fontSize: 16,
-                      height: 1.5,
-                    ),
-                    textAlign: TextAlign.justify,
-                  ),
-                  SizedBox(height: 24),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Fitur Aplikasi:',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
-                        fontSize: 16,
-                      ),
                     ),
                   ),
                   SizedBox(height: 12),
-                  FeatureItem(icon: LucideIcons.camera, text: 'Deteksi dari kamera/galeri'),
-                  FeatureItem(icon: LucideIcons.history, text: 'Riwayat deteksi dengan pencarian'),
-                  FeatureItem(icon: LucideIcons.bookOpen, text: 'Artikel informatif seputar stroberi'),
+                  Text(
+                    'StroMate menghadirkan kemudahan bagi Anda untuk mengetahui tingkat kematangan buah stroberi hanya dengan mengunggah gambar. Dengan kecerdasan buatan, aplikasi ini memberikan informasi tingkat kematangan buah stroberi secara cepat dan edukatif untuk dapat membantu petani, pedagang, maupun konsumen sehari-hari. Aplikasi Stromate dibangun dengan menggunakan teknologi terkini yakni Convolutional Neural Network (CNN) dengan arsitektur MobileNetV2, bagian dari algoritma Deep Learning.',
+                    style: TextStyle(color: AppColors.primary, height: 1.5),
+                    textAlign: TextAlign.justify,
+                  ),
                 ],
               ),
             ),
+
             const SizedBox(height: 20),
 
-            // Card: Petunjuk Penggunaan
-            CardSection(
-              child: const Column(
+            const CardSection(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Fitur Utama:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  FeatureItem(icon: Icons.camera_alt, text: 'Deteksi Tingkat Kematangan Buah Stroberi dari gambar unggahan kamera atau galeri pengguna'),
+                  FeatureItem(icon: Icons.history, text: 'Riwayat deteksi dengan filter berdasarkan tanggal'),
+                  FeatureItem(icon: Icons.menu_book, text: 'Artikel informatif seputar buah stroberi'),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            const CardSection(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Manfaat Aplikasi:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  Text(
+                    '• Membantu mengetahui tingkat kematangan stroberi dari gambar secara cepat\n'
+                    '• Memberikan tips penyimpanan berdasarkan kondisi buah setelah dideteksi\n'
+                    '• Menyediakan informasi dan edukasi tentang buah stroberi melalui fitur artikel\n',
+                    style: TextStyle(color: AppColors.primary, height: 1.5),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            const CardSection(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -105,41 +164,47 @@ class TentangAplikasiPage extends StatelessWidget {
                 ],
               ),
             ),
+
             const SizedBox(height: 20),
 
-            // Card: Developer
             CardSection(
               child: Row(
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.asset(
-                      'assets/images/stroberi.jpg',
+                      'assets/icon/pengembang.png',
                       width: 80,
                       height: 80,
                       fit: BoxFit.cover,
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Pengembang:',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: AppColors.primary,
                           ),
                         ),
-                        SizedBox(height: 4),
-                        Text(
+                        const SizedBox(height: 4),
+                        const Text(
                           'Rizki Putri Fitriyani',
                           style: TextStyle(color: AppColors.primary),
                         ),
-                        Text(
-                          'rizputfy@gmail.com',
-                          style: TextStyle(color: AppColors.primary),
+                        GestureDetector(
+                          onTap: () => _launchEmail(context, 'rizputfy@gmail.com'),
+                          child: const Text(
+                            'rizputfy@gmail.com',
+                            style: TextStyle(
+                              color: AppColors.primary,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -147,11 +212,11 @@ class TentangAplikasiPage extends StatelessWidget {
                 ],
               ),
             ),
+
             const SizedBox(height: 20),
 
-            // Card: Lisensi
-            CardSection(
-              child: const Column(
+            const CardSection(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -176,7 +241,6 @@ class TentangAplikasiPage extends StatelessWidget {
   }
 }
 
-// Reusable card container
 class CardSection extends StatelessWidget {
   final Widget child;
 
@@ -195,7 +259,6 @@ class CardSection extends StatelessWidget {
   }
 }
 
-// Fitur item dengan ikon
 class FeatureItem extends StatelessWidget {
   final IconData icon;
   final String text;

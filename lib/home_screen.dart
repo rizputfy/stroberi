@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Map<String, dynamic>> artikelPopuler = [
     {
-      'image': 'assets/artikel/1.png',
+      'image': 'assets/artikel/logo.png',
       'title': 'STROMATE APP',
       'page': null,
     },

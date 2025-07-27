@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:stroberi/theme.dart';
+import 'theme.dart';
 import 'models/history_item.dart';
 import 'services/history_service.dart';
 import 'hasil_deteksi_page.dart';
@@ -201,17 +201,25 @@ void _showHistoryDetails(BuildContext context, HistoryItem item) {
   );
 
   if (confirmed ?? false) {
-  await HistoryService().deleteHistoryById(item.id!);
-  await loadHistory();
+    await HistoryService().deleteHistoryById(item.id!);
+    await loadHistory();
 
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(
-      content: Text('Riwayat berhasil dihapus.'),
-      duration: Duration(seconds: 2),
-    ),
-  );
-}
+    if (!mounted) return; 
 
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Berhasil"),
+        content: const Text("Riwayat berhasil dihapus."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Tutup"),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 void _confirmDeleteAll() async {
@@ -228,16 +236,25 @@ void _confirmDeleteAll() async {
   );
 
   if (confirmed ?? false) {
-  await HistoryService().deleteAllHistory();
-  await loadHistory();
+    await HistoryService().deleteAllHistory();
+    await loadHistory();
 
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(
-      content: Text('Semua riwayat berhasil dihapus.'),
-      duration: Duration(seconds: 2),
-    ),
-  );
-}
+    if (!mounted) return; 
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Berhasil"),
+        content: const Text("Semua riwayat berhasil dihapus."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Tutup"),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
   @override
